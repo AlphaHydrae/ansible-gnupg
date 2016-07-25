@@ -1,0 +1,8 @@
+- name: yum install gnupg
+  yum: pkg=gnupg state=latest
+  when: ansible_pkg_mgr == 'yum'
+- name: brew install gnupg
+  homebrew: name=gnupg state=present
+  become: true
+  become_user: "{{ gnupg_user }}"
+  when: ansible_pkg_mgr == 'homebrew'
