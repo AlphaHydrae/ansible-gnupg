@@ -1,2 +1,2 @@
 ---
-gnupg_user: "{{ user }}"
+gnupg_homebrew_user: "{{ homebrew_user | default(user) | default(omit) }}"

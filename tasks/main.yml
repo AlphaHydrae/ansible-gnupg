@@ -1,8 +1,17 @@
-- name: yum install gnupg
-  yum: pkg=gnupg state=latest
+---
+
+# Yum
+- name: Install GnuPG (Yum)
+  yum: pkg=gnupg state=present
   when: ansible_pkg_mgr == 'yum'
-- name: brew install gnupg
+
+# Homebrew
+- name: Install GnuPG (Homebrew)
   homebrew: name=gnupg state=present
   become: true
-  become_user: "{{ gnupg_user }}"
+  become_user: "{{ gnupg_homebrew_user }}"
   when: ansible_pkg_mgr == 'homebrew'
+
+# Other package managers
+- fail: msg="{{ ansible_pkg_mgr }} is not a supported package manager (Homebrew or Yum are supported)"
+  when: ansible_pkg_mgr != 'yum' and ansible_pkg_mgr != 'homebrew'
