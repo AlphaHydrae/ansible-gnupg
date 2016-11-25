@@ -7,7 +7,7 @@
 
 # Homebrew
 - name: Install GnuPG (Homebrew)
-  homebrew: name=gnupg state=present
+  homebrew: name=gnupg2 state=present
   become: true
   become_user: "{{ gnupg_homebrew_user }}"
   when: ansible_pkg_mgr == 'homebrew'
