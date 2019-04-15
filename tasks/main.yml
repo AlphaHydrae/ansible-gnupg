@@ -24,8 +24,16 @@
     mode: 0700
     state: directory
 
+- name: Configure gpg
+  template:
+    src: gpg.conf
+    dest: "{{ gnupg_config_file }}"
+    owner: "{{ gnupg_user }}"
+    group: "{{ gnupg_group }}"
+
 - name: Configure gpg-agent
   template:
     src: gpg-agent.conf
     dest: "{{ gnupg_agent_config_file }}"
     owner: "{{ gnupg_user }}"
+    group: "{{ gnupg_group }}"
