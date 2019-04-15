@@ -1,2 +1,9 @@
 ---
-gnupg_homebrew_user: "{{ homebrew_user | default(user) | default(omit) }}"
+gnupg_user: "{{ user | default(omit) }}"
+gnupg_group: "{{ group | default(gnupg_user) }}"
+gnupg_user_home_directory: "{{ host_user_homes }}/{{ gnupg_user }}"
+gnupg_config_directory: "{{ gnupg_user_home_directory }}/.gnupg"
+gnupg_agent_config_file: "{{ gnupg_config_directory }}/gpg-agent.conf"
+gnupg_homebrew_user: "{{ homebrew_user | default(gnupg_user) }}"
+gnupg_default_cache_ttl: 3600
+gnupg_max_cache_ttl: 10800

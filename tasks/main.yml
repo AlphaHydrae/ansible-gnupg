@@ -15,3 +15,17 @@
 # Other package managers
 - fail: msg="{{ ansible_pkg_mgr }} is not a supported package manager (Homebrew or Yum are supported)"
   when: ansible_pkg_mgr != 'yum' and ansible_pkg_mgr != 'homebrew'
+
+- name: Create gnupg configuration directory
+  file:
+    path: "{{ gnupg_config_directory }}"
+    owner: "{{ gnupg_user }}"
+    group: "{{ gnupg_group }}"
+    mode: 0700
+    state: directory
+
+- name: Configure gpg-agent
+  template:
+    src: gpg-agent.conf
+    dest: "{{ gnupg_agent_config_file }}"
+    owner: "{{ gnupg_user }}"

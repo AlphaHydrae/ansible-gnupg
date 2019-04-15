@@ -15,4 +15,5 @@ galaxy_info:
   galaxy_tags:
     - gnupg
 
-dependencies: []
+dependencies:
+  - role: AlphaHydrae.multipass
