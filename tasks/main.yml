@@ -3,6 +3,7 @@
 # Yum
 - name: Install GnuPG (Yum)
   yum: pkg=gnupg state=present
+  tags: [ gnupg ]
   when: ansible_pkg_mgr == 'yum'
 
 # Homebrew
@@ -10,10 +11,12 @@
   homebrew: name=gnupg2 state=present
   become: true
   become_user: "{{ gnupg_homebrew_user }}"
+  tags: [ gnupg ]
   when: ansible_pkg_mgr == 'homebrew'
 
 # Other package managers
 - fail: msg="{{ ansible_pkg_mgr }} is not a supported package manager (Homebrew or Yum are supported)"
+  tags: [ gnupg ]
   when: ansible_pkg_mgr != 'yum' and ansible_pkg_mgr != 'homebrew'
 
 - name: Create gnupg configuration directory
@@ -23,6 +26,7 @@
     group: "{{ gnupg_group }}"
     mode: 0700
     state: directory
+  tags: [ gnupg ]
 
 - name: Configure gpg
   template:
@@ -30,6 +34,7 @@
     dest: "{{ gnupg_config_file }}"
     owner: "{{ gnupg_user }}"
     group: "{{ gnupg_group }}"
+  tags: [ gnupg ]
 
 - name: Configure gpg-agent
   template:
@@ -37,3 +42,4 @@
     dest: "{{ gnupg_agent_config_file }}"
     owner: "{{ gnupg_user }}"
     group: "{{ gnupg_group }}"
+  tags: [ gnupg ]
