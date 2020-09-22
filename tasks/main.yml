@@ -2,13 +2,17 @@
 
 # Yum
 - name: Install GnuPG (Yum)
-  yum: pkg=gnupg state=present
+  yum:
+    pkg: gnupg
+    state: present
   tags: [ gnupg ]
   when: ansible_pkg_mgr == 'yum'
 
 # Homebrew
 - name: Install GnuPG (Homebrew)
-  homebrew: name=gnupg2 state=present
+  homebrew:
+    name: gnupg
+    state: present
   become: true
   become_user: "{{ gnupg_homebrew_user }}"
   tags: [ gnupg ]
